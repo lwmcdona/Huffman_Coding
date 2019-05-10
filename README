@@ -1,0 +1,31 @@
+CMPUT 275 Winter 2017
+Assignment 2: Huffman Coding
+Partners: Logan McDonald (T/R Section) and Veronica Salm (W/F Section)
+
+Collaborated Code: This assignment was completed collaboratively by both partners. All of the files and folders except for util.py are identical to those provided for the assignment and can be found in the assignment 2 folder on eclass.
+
+Included Files:
+- bitio.py: Contains the classs BitWriter and BitReader
+- compress.py: Runs the code to compress a file.
+- minheap.py: The minheap class for creating Huffman trees.
+- huffman.py: Used to create huffman trees as well as encode and decode messages. Within are contained definitions for the TreeLeafEndMessage, TreeLeaf and TreeBranch classes.
+- webserver.py: The file that allows viewing of the compressed files as they are being sent to the web browser
+- wwwroot directory: contains compressed versions of the webpage (index.html.huf) and the image of Huffman (huffman.bmp.huf)
+Modified Files:
+- util.py: Contains the four functions read_tree(), write_tree(), compress(), and decompress()
+
+Running the code:
+Go to the wwwroot directory. Open a bash terminal and open the web server using "python3 ../webserver.py". You can then go to the url "http://localhost:8000" to view the webpage and image of Huffman that will appear if the decompressor is functioning properly.
+
+To compress a file, first copy that file over to the wwwroot directory and then move to that directory and type "python3 ../compress.py somefile.pdf" where somefile.pdf is the name of the file you wish to compress. Then go to the url "http://localhost:8000/somefile.pdf" to view and/or download the decompressed file.
+
+General notes:
+A compressed file consists of two items encoded in one bit stream: 
+1) A Huffman tree including all the characters in the file encoded in binary using the following rules:
+-a branch is encoded with a 1
+-a leaf is encoded with a 01 followed by a byte of data representing the integer value at that leaf i.e. 'A' = 65 (ascii) = 0100 0001
+-an end message is encoded with a 00
+
+2) The encoded message where each character is encoded in binary using the path followed to reach it in the Huffman tree.  
+
+A decompressed file consists of a message in subsequent bytes where each byte represents a character in the message.
